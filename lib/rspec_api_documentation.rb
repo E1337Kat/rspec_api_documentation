@@ -45,6 +45,7 @@ module RspecApiDocumentation
     autoload :CombinedTextWriter
     autoload :CombinedJsonWriter
     autoload :SlateWriter
+    autoload :SlatePagedWriter
     autoload :ApiBlueprintWriter
     autoload :OpenApiWriter
   end

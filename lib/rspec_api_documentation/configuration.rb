@@ -88,6 +88,7 @@ module RspecApiDocumentation
     add_setting :request_headers_to_include, :default => nil
     add_setting :response_headers_to_include, :default => nil
     add_setting :html_embedded_css_file, :default => nil
+    add_setting :slate_multiple_pages, :default => false
 
     # renamed to request_body_formatter. here for backwards compatibility
     add_setting :post_body_formatter, :default => nil

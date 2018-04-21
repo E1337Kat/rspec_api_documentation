@@ -277,7 +277,8 @@ end
 * **api_blueprint**: Generates an index file and example files in [APIBlueprint](https://apiblueprint.org).
 * **append_json**: Lets you selectively run specs without destroying current documentation. See section below.
 * **slate**: Builds markdown files that can be used with [Slate](https://github.com/lord/slate), a beautiful static documentation builder.
-* **open_api**: Generates [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) (OAS) (Current supported version is 2.0). Can be used for [Swagger-UI](https://swagger.io/tools/swagger-ui/) 
+* **open_api**: Generates [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) (OAS) (Current supported version is 2.0). Can be used for [Swagger-UI](https://swagger.io/tools/swagger-ui/)
+* **slate_paged**: Lets you generate a multipaged slate compatible markdown.
 
 ### append_json
 
@@ -499,6 +500,14 @@ paths:
       end
     end
   end
+```
+
+### slate_paged
+
+This format requires one extra configuration option to be set to true to work.
+
+```ruby
+config.slate_multiple_pages = true
 ```
 
 ## Filtering and Exclusion

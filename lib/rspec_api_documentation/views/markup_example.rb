@@ -30,6 +30,10 @@ module RspecApiDocumentation
         "#{basename}.#{extension}"
       end
 
+      def linkname
+        sanitize(description.to_s.downcase)
+      end
+
       def parameters
         super.each do |parameter|
           if parameter.has_key?(:scope)

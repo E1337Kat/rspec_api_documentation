@@ -58,6 +58,7 @@ describe RspecApiDocumentation::Configuration do
     its(:request_headers_to_include) { should be_nil }
     its(:response_headers_to_include) { should be_nil }
     its(:html_embedded_css_file) { should be_nil }
+    its(:slate_multiple_pages) { should be_falsey}
 
     specify "post body formatter" do
       expect(configuration.request_body_formatter.call({ :page => 1})).to eq({ :page => 1 })
