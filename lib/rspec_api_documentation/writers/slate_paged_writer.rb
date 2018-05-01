@@ -11,11 +11,11 @@ module RspecApiDocumentation
       end
 
       def markup_index_class
-        RspecApiDocumentation::Views::SlateIndex
+        RspecApiDocumentation::Views::SlatePagedIndex
       end
 
       def markup_example_class
-        RspecApiDocumentation::Views::SlateExample
+        RspecApiDocumentation::Views::SlatePagedExample
       end
 
       def write

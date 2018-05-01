@@ -1,9 +1,9 @@
 module RspecApiDocumentation
   module Views
-    class SlateExample < MarkdownExample
+    class SlatePagedExample < MarkdownExample
       def initialize(example, configuration)
         super
-        self.template_name = "rspec_api_documentation/slate_example"
+        self.template_name = "rspec_api_documentation/slate_paged_example"
       end
 
       def parameters
