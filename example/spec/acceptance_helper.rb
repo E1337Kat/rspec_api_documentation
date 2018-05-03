@@ -3,8 +3,9 @@ require 'rspec_api_documentation'
 require 'rspec_api_documentation/dsl'
 
 RspecApiDocumentation.configure do |config|
-  config.format = [:open_api, :html]
+  config.format = [:open_api, :json, :combined_text, :html, :slate_paged]
   config.curl_host = 'http://localhost:3000'
   config.api_name = "Example App API"
   config.api_explanation = "API Example Description"
+  config.slate_multiple_pages = true
 end

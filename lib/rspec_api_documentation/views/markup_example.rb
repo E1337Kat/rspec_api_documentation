@@ -21,18 +21,18 @@ module RspecApiDocumentation
       end
 
       def dirname
-        sanitize(sections[:resource_name].to_s.downcase)
+        sanitize(example.metadata[:resource_name].to_s.downcase)
       end
 
       def filename
-        description = sections[:description]
+        description = example.metadata[:description]
         basename = sanitize(description.downcase)
         basename = Digest::MD5.new.update(description).to_s if basename.blank?
         "#{basename}.#{extension}"
       end
 
       def linkname
-        sanitize(sections[:description].to_s.downcase)
+        sanitize(example.metadata[:description].to_s.downcase)
       end
 
       def parameters

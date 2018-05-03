@@ -12,26 +12,22 @@ module RspecApiDocumentation
       end
 
       def dirname
-        sanitize(sections[:resource_name].to_s.downcase)
+        sanitize(index.example.metadata[:resource_name].to_s.downcase)
       end
 
       def filename
-        description = sections[:description]
+        description = index.example.metadata[:acceptance]
         basename = sanitize(description.downcase)
         basename = Digest::MD5.new.update(description).to_s if basename.blank?
         "#{basename}.#{extension}"
       end
 
       def linkname
-        sanitize(sections[:description].to_s.downcase)
+        sanitize(index.example.metadata[:description].to_s.downcase)
       end
 
       def sanitize(name)
         name.gsub(/\s+/, '_').gsub(SPECIAL_CHARS, '')
-      end
-
-      def sections
-        RspecApiDocumentation::Writers::IndexHelper.sections(examples, @configuration)
       end
     end
   end
