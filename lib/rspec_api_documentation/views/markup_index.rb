@@ -3,7 +3,9 @@ require 'mustache'
 module RspecApiDocumentation
   module Views
     class MarkupIndex < Mustache
-      delegate :api_name, :multiple_pages, :api_explanation, to: :@configuration, prefix: false
+      attr_accessor :index, :configuration
+      delegate :api_name, :slate_multiple_pages, :api_explanation, to: :@configuration, prefix: false
+      SPECIAL_CHARS = /[<>:"\/\\|?*]/.freeze
 
       def initialize(index, configuration)
         @index = index
@@ -12,18 +14,31 @@ module RspecApiDocumentation
       end
 
       def dirname
-        sanitize(index.example.metadata[:resource_name].to_s.downcase)
+        index.examples.each do |example|
+          sanitize(example.metadata[:resource_name])
+        end
+        # sections.each do |section|
+        #   sanitize(section[:resource_name].to_s.downcase)
+        # end
       end
 
       def filename
-        description = index.example.metadata[:acceptance]
-        basename = sanitize(description.downcase)
-        basename = Digest::MD5.new.update(description).to_s if basename.blank?
-        "#{basename}.#{extension}"
+        index.examples.each do |example|
+          sanitize(example.metadata[:description])
+        end
+        # sections.each do |section|
+        #   sanitize(section[:description].to_s.downcase)
+        # end
       end
 
       def linkname
-        sanitize(index.example.metadata[:description].to_s.downcase)
+        sections.each do |section|
+          sanitize(section[:description].to_s.downcase)
+        end
+      end
+
+      def sections
+        RspecApiDocumentation::Writers::IndexHelper.sections(index.examples, configuration)
       end
 
       def sanitize(name)

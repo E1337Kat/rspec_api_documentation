@@ -54,6 +54,10 @@ module RspecApiDocumentation
       metadata[:explanation] || nil
     end
 
+    def filename
+      RspecApiDocumentation::Writers::IndexHelper.sanitize(metadata[:description].to_s.downcase) || nil
+    end
+
     def requests
       filter_headers(metadata[:requests]) || []
     end

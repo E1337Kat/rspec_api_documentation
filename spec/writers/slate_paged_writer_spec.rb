@@ -22,7 +22,9 @@ describe RspecApiDocumentation::Writers::SlatePagedWriter do
       FakeFS do
         template_dir = File.join(configuration.template_path, "rspec_api_documentation")
         FileUtils.mkdir_p(template_dir)
-        File.open(File.join(template_dir, "slate_paged_index.mustache"), "w+") { |f| f << "{{ mustache }}" }
+        index_head_template = File.open(File.join(template_dir, "slate_paged_index_head.mustache"), "w+") { |f| f << "{{ mustache }}" }
+        head_template = File.open(File.join(template_dir, "slate_paged_head.mustache"), "w+") { |f| f << "{{ mustache }}" }
+        index_template = File.open(File.join(template_dir, "slate_paged_index.mustache"), "w+") { |f| f << "{{ mustache }}" }
         FileUtils.mkdir_p(configuration.docs_dir)
 
         writer.write
