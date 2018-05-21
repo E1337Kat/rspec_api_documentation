@@ -45,10 +45,10 @@ module RspecApiDocumentation
       def write_example
         index.examples.each do |example|
           markup_example = markup_example_class.new(example, configuration)
-          FileUtils.mkdir_p(configuration.docs_dir.join(markup_example.dirname))
+          FileUtils.mkdir_p(configuration.docs_dir.join(markup_example.resource_dir_name))
 
           File.open(configuration.docs_dir
-           .join(markup_example.dirname, "#{FILENAME}.#{extension}"), "w+") do |f|
+           .join(markup_example.resource_dir_name, "#{FILENAME}.#{extension}"), "w+") do |f|
             f.write markup_example_head_class.new(example, configuration).render
             f.write markup_head_class.new(index, configuration).render
             IndexHelper

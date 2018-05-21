@@ -20,7 +20,7 @@ module RspecApiDocumentation
         super || @example.respond_to?(method, include_private)
       end
 
-      def dirname
+      def resource_dir_name
         sanitize(example.metadata[:resource_name].to_s.downcase)
       end
 
@@ -95,7 +95,7 @@ module RspecApiDocumentation
       end
 
       def sanitize(name)
-        name.gsub(/\s+/, '_').gsub(SPECIAL_CHARS, '')
+        name.gsub(/\s+/, '_').gsub(SPECIAL_CHARS, '').to_s.downcase
       end
 
       def sections

@@ -13,7 +13,7 @@ module RspecApiDocumentation
       end
 
       def sanitize(name)
-        name.gsub(/\s+/, '_').gsub(SPECIAL_CHARS, '')
+        name.gsub(/\s+/, '_').gsub(SPECIAL_CHARS, '').to_s.downcase
       end
       module_function :sections, :sanitize
     end

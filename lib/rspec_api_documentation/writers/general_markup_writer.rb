@@ -15,9 +15,9 @@ module RspecApiDocumentation
         if render_options.fetch(:examples, true)
           index.examples.each do |example|
             markup_example = markup_example_class.new(example, configuration)
-            FileUtils.mkdir_p(configuration.docs_dir.join(markup_example.dirname))
+            FileUtils.mkdir_p(configuration.docs_dir.join(markup_example.resource_dir_name))
 
-            File.open(configuration.docs_dir.join(markup_example.dirname, markup_example.filename), "w+") do |f|
+            File.open(configuration.docs_dir.join(markup_example.resource_dir_name, markup_example.filename), "w+") do |f|
               f.write markup_example.render
             end
           end

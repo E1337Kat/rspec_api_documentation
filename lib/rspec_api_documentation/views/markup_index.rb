@@ -13,24 +13,6 @@ module RspecApiDocumentation
         self.template_path = configuration.template_path
       end
 
-      def dirname
-        index.examples.each do |example|
-          sanitize(example.metadata[:resource_name])
-        end
-        # sections.each do |section|
-        #   sanitize(section[:resource_name].to_s.downcase)
-        # end
-      end
-
-      def filename
-        index.examples.each do |example|
-          sanitize(example.metadata[:description])
-        end
-        # sections.each do |section|
-        #   sanitize(section[:description].to_s.downcase)
-        # end
-      end
-
       def linkname
         sections.each do |section|
           sanitize(section[:description].to_s.downcase)
