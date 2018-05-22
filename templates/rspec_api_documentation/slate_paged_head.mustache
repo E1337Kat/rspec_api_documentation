@@ -6,13 +6,13 @@ multiple_pages: {{ slate_multiple_pages }}
 
 resources:
 {{# sections }}
-  - <a href="/docs/{{ dirname }}/index.html" class='toc-h1 toc-link' data-title='{{ dirname }}'>{{ resource_name }}</a>
+  - {{ resource_name }}:'/docs/{{ dirname }}/index.html'
 {{/ sections }}
 
 {{# sections }}
 {{ dirname }}:
   {{# examples }}
-  - <a href="/docs/{{ dirname }}/index.html#{{ filename }}" class='toc-h2 toc-link' data-title='{{ filename }}'>{{ description }}</a>
+  - {{ description }}:'{{ filename }}'
   {{/ examples }}
 {{/ sections }}
 ---
