@@ -50,9 +50,14 @@ module RspecApiDocumentation
           File.open(configuration.docs_dir.join(markup_example.resource_dir_name, "#{FILENAME}"), "w+") do |f|
             f.write markup_example_head_class.new(example, configuration).render
             f.write markup_head_class.new(index, configuration).render
-            IndexHelper.sections(index.examples, @configuration).each do
-              markup_example = markup_example_class.new(example, configuration)
-              f.write markup_example.render
+            IndexHelper.sections(index.examples, @configuration).each do |section|
+              # file.write "# #{section[:resource_name]}\n\n"
+              # file.write "#{section[:resource_explanation]}\n\n"
+  
+              section[:examples].each do |example|
+                markup_example = markup_example_class.new(example, configuration)
+                f.write markup_example.render
+              end
             end
           end
         end
