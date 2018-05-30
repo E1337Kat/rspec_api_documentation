@@ -36,33 +36,33 @@ module RspecApiDocumentation
           f.write markup_index_class.new(index, configuration).render
           IndexHelper.sections(index.examples, @configuration).each do |section|
             f.write "# #{section[:resource_name]}\n\n"
-            f.write "#{section[:resource_explanation]}\n\n"
+            f.write "<aside class=\"notice\">\n#{section[:resource_explanation]}\n</aside>\n\n"
+
           end
         end
         write_example
       end
 
       def write_example
-        index.examples.each do |example|
-          markup_example = markup_example_class.new(example, configuration)
-          FileUtils.mkdir_p(configuration.docs_dir.join(markup_example.resource_dir_name))
-
-          File.open(configuration.docs_dir.join(markup_example.resource_dir_name, "#{FILENAME}"), "w+") do |f|
-            f.write markup_example_head_class.new(example, configuration).render
+        IndexHelper.sections(index.examples, @configuration).each do |section|
+          FileUtils.mkdir_p(configuration.docs_dir.join(section[:dirname]))
+          
+          File.open(configuration.docs_dir.join(section[:dirname], "#{FILENAME}"), "w+") do |f|
+            # f.write markup_example_head_class.new(example, configuration).render
+            f.write "---\ntitle: #{section[:resource_name]}\n"
             f.write markup_head_class.new(index, configuration).render
-            IndexHelper.sections(index.examples, @configuration).each do |section|
-              # file.write "# #{section[:resource_name]}\n\n"
-              # file.write "#{section[:resource_explanation]}\n\n"
-  
-              section[:examples].each do |example|
-                markup_example = markup_example_class.new(example, configuration)
-                f.write markup_example.render
-              end
+            f.write "\n# #{section[:resource_name]}\n\n"
+            f.write "<aside class=\"notice\">\n#{section[:resource_explanation]}\n</aside>\n\n"
+          end
+
+          section[:examples].each do |example|
+            File.open(configuration.docs_dir.join(section[:dirname], "#{FILENAME}"), "a+") do |f|
+              markup_example = markup_example_class.new(example, configuration)
+              f.write markup_example.render
             end
           end
         end
       end
-      
     end
   end
 end
