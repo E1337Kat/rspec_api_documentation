@@ -36,7 +36,7 @@ module RspecApiDocumentation
           f.write markup_index_class.new(index, configuration).render
           IndexHelper.sections(index.examples, @configuration).each do |section|
             f.write "# #{section[:resource_name]}\n\n"
-            f.write "<aside class=\"notice\">\n#{section[:resource_explanation]}\n</aside>\n\n"
+            f.write "#{section[:resource_explanation]}\n\n"
 
           end
         end
@@ -52,7 +52,7 @@ module RspecApiDocumentation
             f.write "---\ntitle: #{section[:resource_name]}\n"
             f.write markup_head_class.new(index, configuration).render
             f.write "\n# #{section[:resource_name]}\n\n"
-            f.write "<aside class=\"notice\">\n#{section[:resource_explanation]}\n</aside>\n\n"
+            f.write "\n#{section[:resource_explanation]}\n\n"
           end
 
           section[:examples].each do |example|
