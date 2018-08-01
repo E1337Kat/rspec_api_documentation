@@ -81,7 +81,7 @@ module RspecApiDocumentation
       end
 
       def explantion_exists?(section)
-        true if section[:resource_explanation] != ''
+        true if section[:resource_explanation].to_s != ''
       end
     end
   end

@@ -5,6 +5,8 @@ resource "Uploads" do
 
   let(:api_key) { "Basic #{Base64.encode64('user:password')}" }
 
+  explanation "Uploading is important!"
+  
   post "/uploads" do
     parameter :file, "New file to upload"
 
