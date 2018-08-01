@@ -1,9 +1,9 @@
 module RspecApiDocumentation
   module Views
-    class SlatePagedIndexHead < MarkdownIndex
+    class SlatePagedData < MarkdownIndex
       def initialize(index, configuration)
         super
-        self.template_name = "rspec_api_documentation/slate_paged_index_head"
+        self.template_name = "rspec_api_documentation/slate_paged_data"
       end
     end
   end

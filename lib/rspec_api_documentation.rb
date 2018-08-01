@@ -89,9 +89,7 @@ module RspecApiDocumentation
     autoload :SlateExample
     autoload :SlatePagedIndex
     autoload :SlatePagedExample
-    autoload :SlatePagedIndexHead
-    autoload :SlatePagedExampleHead
-    autoload :SlatePagedHead
+    autoload :SlatePagedData
     autoload :ApiBlueprintIndex
     autoload :ApiBlueprintExample
   end

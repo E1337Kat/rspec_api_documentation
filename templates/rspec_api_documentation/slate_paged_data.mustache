@@ -1,0 +1,26 @@
+production: &production
+  title: {{ api_name }}
+
+  language_tabs:
+    - json: JSON
+    - shell: cURL
+
+  multiple_pages: {{ slate_multiple_pages }}
+
+  search: false
+
+  resources:
+  {{# sections }}
+    - {{ resource_name }}:'{{ dirname }}'
+  {{/ sections }}
+
+  {{# sections }}
+  {{ dirname }}:
+    {{# examples }}
+    - {{ description }}:'{{ filename }}'
+    {{/ examples }}
+  {{/ sections }}
+
+development:
+  <<: *production
+  debug: false
