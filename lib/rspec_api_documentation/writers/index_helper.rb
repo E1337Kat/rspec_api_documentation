@@ -3,7 +3,7 @@ require "active_support/core_ext/enumerable"
 module RspecApiDocumentation
   module Writers
     module IndexHelper
-      SPECIAL_CHARS = /[<>:"\/\\|?*]/.freeze
+      SPECIAL_CHARS = /[<>:"\/\\|?*\']/.freeze
       def sections(examples, configuration)
         resources = examples.group_by(&:resource_name).inject([]) do |arr, (resource_name, examples)|
           ordered_examples = configuration.keep_source_order ? examples : examples.sort_by(&:description)
