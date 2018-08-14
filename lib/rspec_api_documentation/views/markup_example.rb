@@ -3,7 +3,7 @@ require 'mustache'
 module RspecApiDocumentation
   module Views
     class MarkupExample < Mustache
-      SPECIAL_CHARS = /[<>:"\/\\|?*]/.freeze
+      SPECIAL_CHARS = /[<>:"\/\\|?*\']/.freeze
 
       def initialize(example, configuration)
         @example = example

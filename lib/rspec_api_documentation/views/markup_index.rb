@@ -5,7 +5,7 @@ module RspecApiDocumentation
     class MarkupIndex < Mustache
       attr_accessor :index, :configuration
       delegate :api_name, :slate_multiple_pages, :api_explanation, to: :@configuration, prefix: false
-      SPECIAL_CHARS = /[<>:"\/\\|?*]/.freeze
+      SPECIAL_CHARS = /[<>:"\/\\|?*\']/.freeze
 
       def initialize(index, configuration)
         @index = index

@@ -29,18 +29,16 @@ module RspecApiDocumentation
 
       def write_data_file
         File.open(configuration.docs_dir.join(DATAFILE.to_s), 'w+') do |f|
-          f.write markup_data_class.new(index, configuration).render #heck
+          f.write markup_data_class.new(index, configuration).render
         end
       end
 
       def write_index
         File.open(configuration.docs_dir.join(FILENAME.to_s), 'w+') do |f|
-          f.write markup_index_class.new(index, configuration).render #doubleheck
+          f.write markup_index_class.new(index, configuration).render
           IndexHelper.sections(index.examples, @configuration).each do |section|
             f.write write_resource_name(section)
-            if explantion_exists?(section)
-              f.write aside_explanation(section)
-            end
+            f.write aside_explanation(section) if explantion_exists?(section)
           end
         end
       end
