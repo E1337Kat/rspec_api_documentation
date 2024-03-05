@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mustache", "~> 1.0", ">= 0.99.4"
 
   s.add_development_dependency "bundler", ">= 1.16"
-  s.add_development_dependency "fakefs", "~> 0.6.0"
+  s.add_development_dependency "fakefs", "~> 2.5.0"
   s.add_development_dependency "sinatra", "~> 1.4.7"
   s.add_development_dependency "aruba", "~> 0.13.0"
   s.add_development_dependency "capybara", "~> 2.6.2"
@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "webmock", "~> 3.8.3"
   s.add_development_dependency "rspec-its", "~> 1.2.0"
   s.add_development_dependency "faraday", "~> 1.0.0"
-  s.add_development_dependency "nokogiri", "~> 1.8.4"
+  s.add_development_dependency "nokogiri", "~> 1.16.2"
   s.add_development_dependency "yard", "~> 0.9.15"
   s.add_development_dependency "inch", "~> 0.8.0"
   s.add_development_dependency "minitest", "~> 5.8.4"
@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "gherkin", "~> 3.2.0"
   s.add_development_dependency "multi_json", "~> 1.11.2"
   s.add_development_dependency "rspec", "~> 3.4.0"
+  s.add_development_dependency "webrick", "~> 1.8"
 
   s.files        = Dir.glob("lib/**/*") + Dir.glob("templates/**/*")
   s.require_path = "lib"
