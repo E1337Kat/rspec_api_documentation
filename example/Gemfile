@@ -1,16 +1,19 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '3.0.6'
 
-gem 'rack-cors', :require => 'rack/cors'
-gem 'rails', '4.2.5.1'
+gem 'rack-cors', require: 'rack/cors'
+gem 'rails', '6.1.6'
 gem 'sqlite3'
 gem 'spring', group: :development
-gem 'raddocs', '0.4.0'
+gem 'raddocs', '2.3.0', github: 'goodylabs/raddocs'
+gem "sprockets-rails"
+gem "sprockets", "~> 3.7.0"
+gem 'thin'
 
 group :test, :development do
   gem 'byebug'
   gem 'awesome_print'
   gem 'rspec-rails'
-  gem 'rspec_api_documentation', :path => "../"
+  gem 'rspec_api_documentation', path: "../"
 end

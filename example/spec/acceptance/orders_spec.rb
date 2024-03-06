@@ -6,17 +6,17 @@ resource "Orders" do
 
   explanation "Orders are top-level business objects"
 
-  let(:order) { Order.create(:name => "Old Name", :paid => true, :email => "email@example.com") }
+  let(:order) { Order.create(name: "Old Name", paid: true, email: "email@example.com") }
 
   get "/orders" do
-    authentication :apiKey, "API_TOKEN", :name => "AUTH_TOKEN"
+    authentication :apiKey, "API_TOKEN", name: "AUTH_TOKEN"
     parameter :page, "Current page of orders", with_example: true
 
     let(:page) { 1 }
 
     before do
       2.times do |i|
-        Order.create(:name => "Order #{i}", :email => "email#{i}@example.com", :paid => true)
+        Order.create(name: "Order #{i}", email: "email#{i}@example.com", paid: true)
       end
     end
 
@@ -27,7 +27,7 @@ resource "Orders" do
   end
 
   head "/orders" do
-    authentication :apiKey, "API_TOKEN", :name => "AUTH_TOKEN"
+    authentication :apiKey, "API_TOKEN", name: "AUTH_TOKEN"
 
     example_request "Getting the headers" do
       expect(response_headers["Cache-Control"]).to eq("max-age=0, private, must-revalidate")
@@ -35,17 +35,17 @@ resource "Orders" do
   end
 
   post "/orders" do
-    with_options :scope => :order, :with_example => true do
-      parameter :name, "Name of order", :required => true
-      parameter :paid, "If the order has been paid for", :required => true
+    with_options scope: :order, with_example: true do
+      parameter :name, "Name of order", required: true
+      parameter :paid, "If the order has been paid for", required: true
       parameter :email, "Email of user that placed the order"
-      parameter :data, "Array of string", :type => :array, :items => {:type => :string}
+      parameter :data, "Array of string", type: :array, items: {type: :string}
     end
 
-    with_options :scope => :order do
-      response_field :name, "Name of order", :type => :string
-      response_field :paid, "If the order has been paid for", :type => :boolean
-      response_field :email, "Email of user that placed the order", :type => :string
+    with_options scope: :order do
+      response_field :name, "Name of order", type: :string
+      response_field :paid, "If the order has been paid for", type: :boolean
+      response_field :email, "Email of user that placed the order", type: :string
     end
 
     let(:name) { "Order 1" }
@@ -92,7 +92,7 @@ resource "Orders" do
   end
 
   put "/orders/:id" do
-    with_options :scope => :order, with_example: true do
+    with_options scope: :order, with_example: true do
       parameter :name, "Name of order"
       parameter :paid, "If the order has been paid for"
       parameter :email, "Email of user that placed the order"
