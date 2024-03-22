@@ -107,7 +107,11 @@ module RspecApiDocumentation
         super.map do |hash|
           if @host
             if hash[:curl].is_a? RspecApiDocumentation::Curl
-              hash[:curl] = hash[:curl].output(@host, @filter_headers)
+              if @configuration.detailed_curl_output
+                hash[:curl] = hash[:curl].detailed_output(@host, @filter_headers)
+              else
+                hash[:curl] = hash[:curl].output(@host, @filter_headers)
+              end
             end
           else
             hash[:curl] = nil
