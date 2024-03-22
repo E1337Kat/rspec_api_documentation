@@ -11,28 +11,87 @@ module RspecApiDocumentation
       send(method.downcase)
     end
 
+    def detailed_output(config_host, config_headers_to_filer = nil)
+      self.host = config_host
+      @config_headers_to_filer = Array(config_headers_to_filer)
+      send(method.downcase)
+    end
+
     def post
       "curl \"#{url}\" #{post_data} -X POST #{headers}"
+    end
+
+    def detailed_post
+      {
+        command: "curl \"#{url}\" ",
+        data: "#{post_data}",
+        x: "-X POST",
+        headers: detailed_headers}
     end
 
     def get
       "curl -g \"#{url}#{get_data}\" -X GET #{headers}"
     end
 
+    def detailed_get
+      {
+        command: "curl -g \"#{url}",
+        data: "#{get_data}\"",
+        x: "-X GET",
+        headers: detailed_headers
+      }
+    end
+
     def head
       "curl \"#{url}#{get_data}\" -X HEAD #{headers}"
+    end
+
+    def detailed_head
+      {
+        command: "curl \"#{url}",
+        data: "#{get_data}\"",
+        x: "-X HEAD",
+        headers: detailed_headers
+      }
     end
 
     def put
       "curl \"#{url}\" #{post_data} -X PUT #{headers}"
     end
 
+    def detailed_put
+      {
+        command: "curl \"#{url}\" ",
+        data: "#{post_data}",
+        x: "-X PUT",
+        headers: detailed_headers
+      }
+    end
+
     def delete
       "curl \"#{url}\" #{post_data} -X DELETE #{headers}"
     end
 
+    def detailed_delete
+      {
+        command: "curl \"#{url}\" ",
+        data: "#{post_data}",
+        x: "-X DELETE",
+        headers: detailed_headers
+      }
+    end
+
     def patch
       "curl \"#{url}\" #{post_data} -X PATCH #{headers}"
+    end
+
+    def detailed_patch
+      {
+        command: "curl \"#{url}\" ",
+        data: "#{post_data}",
+        x: "-X PATCH",
+        headers: detailed_headers
+      }
     end
 
     def url
@@ -41,12 +100,22 @@ module RspecApiDocumentation
 
     def headers
       filter_headers(super).map do |k, v|
-        if k =~ /authorization/i && v =~ /^Basic/
-          "\\\n\t-u #{format_auth_header(v)}"
-        else
-          "\\\n\t-H \"#{format_full_header(k, v)}\""
-        end
+        "\\\n\t#{header(k, v)}"
       end.join(" ")
+    end
+
+    def detailed_headers
+      filter_headers(super).map do |k, v|
+        header(k, v)
+      end
+    end
+
+    def header(key, value)
+      if k =~ /authorization/i && v =~ /^Basic/
+        "-u #{format_auth_header(v)}"
+      else
+        "-H \"#{format_full_header(k, v)}\""
+      end
     end
 
     def get_data
