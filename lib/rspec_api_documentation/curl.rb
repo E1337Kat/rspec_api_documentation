@@ -14,7 +14,7 @@ module RspecApiDocumentation
     def detailed_output(config_host, config_headers_to_filer = nil)
       self.host = config_host
       @config_headers_to_filer = Array(config_headers_to_filer)
-      send(method.downcase)
+      send("detailed_#{method.downcase}")
     end
 
     def post
