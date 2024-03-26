@@ -103,7 +103,7 @@ module RspecApiDocumentation
     end
 
     def detailed_headers
-      filter_headers(super).map do |k, v|
+      filter_headers(headers).map do |k, v|
         header(k, v)
       end
     end
