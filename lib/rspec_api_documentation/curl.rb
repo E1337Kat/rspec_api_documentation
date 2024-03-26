@@ -23,8 +23,8 @@ module RspecApiDocumentation
 
     def detailed_post
       {
-        command: "curl \"#{url}\" ",
-        data: "#{post_data}",
+        command: "curl \"#{url}\"",
+        body: "#{post_data}",
         x: "-X POST",
         headers: detailed_headers}
     end
@@ -35,8 +35,7 @@ module RspecApiDocumentation
 
     def detailed_get
       {
-        command: "curl -g \"#{url}",
-        data: "#{get_data}\"",
+        command: "curl -g \"#{url}#{get_data}\"",
         x: "-X GET",
         headers: detailed_headers
       }
@@ -48,8 +47,7 @@ module RspecApiDocumentation
 
     def detailed_head
       {
-        command: "curl \"#{url}",
-        data: "#{get_data}\"",
+        command: "curl \"#{url}#{get_data}\"",
         x: "-X HEAD",
         headers: detailed_headers
       }
@@ -61,8 +59,8 @@ module RspecApiDocumentation
 
     def detailed_put
       {
-        command: "curl \"#{url}\" ",
-        data: "#{post_data}",
+        command: "curl \"#{url}\"",
+        body: "#{post_data}",
         x: "-X PUT",
         headers: detailed_headers
       }
@@ -74,8 +72,8 @@ module RspecApiDocumentation
 
     def detailed_delete
       {
-        command: "curl \"#{url}\" ",
-        data: "#{post_data}",
+        command: "curl \"#{url}\"",
+        body: "#{post_data}",
         x: "-X DELETE",
         headers: detailed_headers
       }
@@ -87,8 +85,8 @@ module RspecApiDocumentation
 
     def detailed_patch
       {
-        command: "curl \"#{url}\" ",
-        data: "#{post_data}",
+        command: "curl \"#{url}\"",
+        body: "#{post_data}",
         x: "-X PATCH",
         headers: detailed_headers
       }
