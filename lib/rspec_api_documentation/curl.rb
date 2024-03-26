@@ -8,12 +8,14 @@ module RspecApiDocumentation
     def output(config_host, config_headers_to_filer = nil)
       self.host = config_host
       @config_headers_to_filer = Array(config_headers_to_filer)
+      @detailed = false
       send(method.downcase)
     end
 
     def detailed_output(config_host, config_headers_to_filer = nil)
       self.host = config_host
       @config_headers_to_filer = Array(config_headers_to_filer)
+      @detailed = true
       send("detailed_#{method.downcase}")
     end
 
@@ -26,7 +28,8 @@ module RspecApiDocumentation
         command: "curl \"#{url}\"",
         body: "#{post_data}",
         x: "-X POST",
-        headers: detailed_headers}
+        headers: headers
+      }
     end
 
     def get
@@ -37,7 +40,7 @@ module RspecApiDocumentation
       {
         command: "curl -g \"#{url}#{get_data}\"",
         x: "-X GET",
-        headers: detailed_headers
+        headers: headers
       }
     end
 
@@ -49,7 +52,7 @@ module RspecApiDocumentation
       {
         command: "curl \"#{url}#{get_data}\"",
         x: "-X HEAD",
-        headers: detailed_headers
+        headers: headers
       }
     end
 
@@ -62,7 +65,7 @@ module RspecApiDocumentation
         command: "curl \"#{url}\"",
         body: "#{post_data}",
         x: "-X PUT",
-        headers: detailed_headers
+        headers: headers
       }
     end
 
@@ -75,7 +78,7 @@ module RspecApiDocumentation
         command: "curl \"#{url}\"",
         body: "#{post_data}",
         x: "-X DELETE",
-        headers: detailed_headers
+        headers: headers
       }
     end
 
@@ -88,7 +91,7 @@ module RspecApiDocumentation
         command: "curl \"#{url}\"",
         body: "#{post_data}",
         x: "-X PATCH",
-        headers: detailed_headers
+        headers: headers
       }
     end
 
@@ -97,16 +100,19 @@ module RspecApiDocumentation
     end
 
     def headers
-      filter_headers(super).map do |k, v|
-        "\\\n\t#{header(k, v)}"
-      end.join(" ")
+      the_heads = filter_headers(super).map do |k, v|
+        if @detailed
+          header(k, v)
+        else
+          "\\\n\t#{header(k, v)}"
+        end
+      end
+
+      return the_heads if @detailed
+
+      the_heads.join(" ")
     end
 
-    def detailed_headers
-      filter_headers(headers).map do |k, v|
-        header(k, v)
-      end
-    end
 
     def header(key, value)
       if k =~ /authorization/i && v =~ /^Basic/
