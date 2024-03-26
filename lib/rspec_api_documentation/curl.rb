@@ -115,10 +115,10 @@ module RspecApiDocumentation
 
 
     def header(key, value)
-      if k =~ /authorization/i && v =~ /^Basic/
-        "-u #{format_auth_header(v)}"
+      if key =~ /authorization/i && value =~ /^Basic/
+        "-u #{format_auth_header(value)}"
       else
-        "-H \"#{format_full_header(k, v)}\""
+        "-H \"#{format_full_header(key, value)}\""
       end
     end
 
