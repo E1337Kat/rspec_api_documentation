@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    render :json => Order.all
+    render json: Order.all
   end
 
   def show
@@ -18,13 +18,13 @@ class OrdersController < ApplicationController
 
   def create
     order = Order.create(order_params)
-    render :json => order, :status => 201, :location => order_url(order)
+    render json: order, status: 201, location: order_url(order)
   end
 
   def update
     order = Order.find(params[:id])
     order.update(order_params)
-    render :nothing => true, :status => 204
+    head 204
   end
 
   def destroy
